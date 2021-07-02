@@ -1419,22 +1419,26 @@ ICM_20948_Status_e inv_icm20948_write_mems(ICM_20948_Device_t *pdev, unsigned sh
     {
       return result;
     }
-
+/*
     if (length - bytesWritten <= INV_MAX_SERIAL_WRITE)
       thisLen = length - bytesWritten;
     else
       thisLen = INV_MAX_SERIAL_WRITE;
-
+*/
     /* Write data */
 
-    result = ICM_20948_execute_w(pdev, AGB0_REG_MEM_R_W, (uint8_t *)&data[bytesWritten], thisLen);
+    //result = ICM_20948_execute_w(pdev, AGB0_REG_MEM_R_W, (uint8_t *)&data[bytesWritten], thisLen);
+    result = ICM_20948_execute_w(pdev, AGB0_REG_MEM_R_W, (uint8_t *)&data[bytesWritten], 1);
     if (result != ICM_20948_Stat_Ok)
     {
       return result;
     }
-
+/*
     bytesWritten += thisLen;
     reg += thisLen;
+*/
+    bytesWritten += 1;
+    reg += 1;
   }
 
   return result;
@@ -1493,21 +1497,25 @@ ICM_20948_Status_e inv_icm20948_read_mems(ICM_20948_Device_t *pdev, unsigned sho
       return result;
     }
 
+/*
     if (length - bytesRead <= INV_MAX_SERIAL_READ)
       thisLen = length - bytesRead;
     else
       thisLen = INV_MAX_SERIAL_READ;
-
+*/
     /* Read data */
-
-    result = ICM_20948_execute_r(pdev, AGB0_REG_MEM_R_W, &data[bytesRead], thisLen);
+  result = ICM_20948_execute_r(pdev, AGB0_REG_MEM_R_W, &data[bytesRead], 1);
+//    result = ICM_20948_execute_r(pdev, AGB0_REG_MEM_R_W, &data[bytesRead], thisLen);
     if (result != ICM_20948_Stat_Ok)
     {
       return result;
     }
-
+/*
     bytesRead += thisLen;
     reg += thisLen;
+*/
+    bytesRead += 1;
+    reg += 1;
   }
 
   return result;
