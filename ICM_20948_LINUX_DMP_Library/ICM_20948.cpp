@@ -1376,7 +1376,7 @@ ICM_20948_Status_e ICM_20948_I2C::begin(int bus, bool ad0val)
 
   /* Enable I2C */
   _i2c = new i2cpp();
-  if(!_i2c->begin(bus, _addr)) return false;
+  if(!_i2c->begin(bus, _addr)) return ICM_20948_Stat_Err;
 
   // Set up the serif
   _serif.write = ICM_20948_write_I2C;
@@ -1640,7 +1640,7 @@ ICM_20948_Status_e ICM_20948_write_I2C(uint8_t reg, uint8_t *data, uint32_t len,
     return ICM_20948_Stat_ParamErr;
   }
   i2cpp * i2c = ((ICM_20948_I2C *)user)->_i2c; // Cast user field to ICM_20948_I2C type and extract the I2C interface pointer
-  if(!_i2c->writeReg((uint8_t) reg, data, len)) return ICM_20948_Stat_ParamErr; // Error reading
+  if(!i2c->writeReg((uint8_t) reg, data, len)) return ICM_20948_Stat_ParamErr; // Error reading
   return ICM_20948_Stat_Ok;
 }
 
@@ -1651,7 +1651,7 @@ ICM_20948_Status_e ICM_20948_read_I2C(uint8_t reg, uint8_t *buff, uint32_t len, 
     return ICM_20948_Stat_ParamErr;
   }
   i2cpp * i2c = ((ICM_20948_I2C *)user)->_i2c; // Cast user field to ICM_20948_I2C type and extract the I2C interface pointer
-  if(!_i2c->readReg((uint8_t) reg, data, len)) return ICM_20948_Stat_ParamErr; // Error reading
+  if(!i2c->readReg((uint8_t) reg, buff, len)) return ICM_20948_Stat_ParamErr; // Error reading
   return ICM_20948_Stat_Ok;
 }
 /*
