@@ -1366,10 +1366,10 @@ ICM_20948_I2C::ICM_20948_I2C()
 {
 }
 
-ICM_20948_Status_e ICM_20948_I2C::begin(int bus, bool ad0val = true)
+ICM_20948_Status_e ICM_20948_I2C::begin(int bus, bool ad0val)
 {
   _addr = ICM_20948_I2C_ADDR_AD0;
-  if (_ad0val)
+  if (ad0val)
   {
     _addr = ICM_20948_I2C_ADDR_AD1;
   }
