@@ -781,7 +781,7 @@ ICM_20948_Status_e ICM_20948::startupDefault(bool minimal)
     status = retval;
     return status;
   }
-  delay(50);
+  usleep(50 * 1000);
 
   retval = sleep(false);
   if (retval != ICM_20948_Stat_Ok)
@@ -1439,7 +1439,7 @@ ICM_20948_Status_e ICM_20948::startupMagnetometer(bool minimal)
 
     i2cMasterReset(); //Otherwise, reset the master I2C and try again
 
-    delay(10);
+    usleep(10 * 1000);
   }
 
   if (tries == MAX_MAGNETOMETER_STARTS)

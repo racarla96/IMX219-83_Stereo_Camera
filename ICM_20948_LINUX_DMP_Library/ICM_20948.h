@@ -11,6 +11,7 @@ A C++ interface to the ICM-20948
 #include "util/AK09916_REGISTERS.h"
 
 #include <i2cpp.h>
+#include <unistd.h>
 
 #define DEBUG
 
