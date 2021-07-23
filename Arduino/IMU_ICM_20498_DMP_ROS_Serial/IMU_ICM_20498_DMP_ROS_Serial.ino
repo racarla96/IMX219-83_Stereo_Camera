@@ -291,7 +291,7 @@ void loop()
 #ifndef TEST
   t_clock = millis();
   if (t1_next <= t_clock) {
-    //msg_imu.header.stamp = nh.now();
+    msg_imu.header.stamp = nh.now();
 
     msg_imu.orientation.w = q0;
     msg_imu.orientation.x = q1;
@@ -305,8 +305,9 @@ void loop()
     msg_imu.linear_acceleration.x = acc_x;
     msg_imu.linear_acceleration.y = acc_y;
     msg_imu.linear_acceleration.z = acc_z;
-
+    
     pub_imu.publish(&msg_imu);
+    
     nh.spinOnce();
 
     t1_next = t1_next + t1_period;
